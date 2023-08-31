@@ -1,83 +1,47 @@
-import React, { useState } from 'react';
+import {useState} from 'react';
 import './App.css';
+import background from "./assets/classe-social.jpg";
+import Cadastrar from './pagina/Cadastrar/Cadastrar';
 
-function App() {
-  const [authorName, setAuthorName] = useState('');
-  const [postContent, setPostContent] = useState('');
-  const [posts, setPosts] = useState([]);
+//const initialState = {email: 'alessandrarostberti@gmail.com', senha:'girassol'};
 
- 
+function App(props) {
+  const [formValues, setFormValues] = useState({});
 
-  const createPost = () => {
-    if (postContent.trim() !== '') {
-      const newPost = {
-        author: authorName,
-        content: postContent,
-        liked: false
-      };
-
-      setPosts([...posts, newPost]);
-      setAuthorName('');
-      setPostContent('');
-    }
+  const handleInputChange = (e) => {
+    const {target} = e;
+    const {email, value} = target;
+    console.log('*** handleInputChange', email, value);
+    setFormValues({...formValues, [email]: value});
   };
 
-  const toggleLike = (index) => {
-    const updatedPosts = [...posts];
-    updatedPosts[index].liked = !updatedPosts[index].liked;
-    setPosts(updatedPosts);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    console.log('*** handleSubmit', data);
+
   };
+
+  console.log('*** formValues', formValues);
 
   return (
-      <div className="App">
-          <header>
-              <div>Forum Chat</div>
-                  <nav>
-                    <a href="qs.html">Quem Somos</a>
-                    <a href="login.html">Login</a>
-                    <a href="cadastro.html">Cadastro</a>
-                  </nav>
-          </header>
-      <main>
-          <div className="title">
-            <h1>Classes Sociais Marginalizadas no Mundo do Trabalho</h1>
-          </div>
-          <div id="forum-section" className="forum-section">
-              <div className="post-form">
-                <h2>Adicionar Nova Postagem</h2>
-          <input
-              type="text"
-              className="author-input"
-              placeholder="Seu nome"
-              value={authorName}
-              onChange={(e) => setAuthorName(e.target.value)}
-            />
-          <textarea
-              placeholder="Digite sua postagem aqui"
-              value={postContent}
-              onChange={(e) => setPostContent(e.target.value)}
-            />
-          <button onClick={createPost}>Postar</button>
-          </div>
-              <div className="post-list">
-                {posts.map((post, index) => (
-              <div key={index} className="post">
-                <p className="author">Por: {post.author}</p>
-                  <p>{post.content}</p>
-          <span
-                  className={`like-button ${post.liked ? 'liked' : ''}`}
-                  onClick={() => toggleLike(index)}>
-                  Like
-          </span>
-      </div>
-            ))}
-     </div>
-   </div>
- </main>
-</div>
+    <div class="d-flex mb-3" style={{backgroundImage: `url(${background})`}}>
+      <h1 margin="10px">Login</h1>
+      <form class="center-form" onSubmit={handleSubmit}>
+        <label for="exampleInputEmail1"  id="exampleInputEmail" class="form-label fs-1">E-mail:</label>
+        <input type="text-center" name="email" placeholder="email" onChange={handleInputChange} value={formValues.email}></input>
+        <label for="exampleInputSenha" id="exampleInputSenha" class="form-label fs-1">Senha:</label>
+        <input type="text-center" name="senha" placeholder="senha" onChange={handleInputChange} value={formValues.senha}></input>
+        <p>Ainda não tem conta? Criar conta.</p>
+        <button type='submit'>Entrar</button>
+        
+      </form>
+      
+    </div>
   );
 }
-
- 
 
 export default App;
