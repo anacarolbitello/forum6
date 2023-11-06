@@ -71,15 +71,6 @@ function Cadastrar(props){
                                     onChange={onChangeSenha}
                                 />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="confirmar-senha" className="form-control-label">Confirmar Senha:</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    value={senha}
-                                    onChange={onChangeConfirmarSenha}
-                                />
-                            </div>
                         </form>
                     </div>
                     <div className="card-footer">

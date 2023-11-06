@@ -1,22 +1,27 @@
-import { useNavigate } from "react-router-dom"
 
-function Home(){
+import HeaderPerfil from "../../componentes/Header/HeaderPerfil";
 
-    const navigate = useNavigate()
+import { SectionStyle } from "./styles";
 
-    const handleLogout = () =>{
-        localStorage.removeItem('token')
-        localStorage.removeItem('email')
-        navigate('/')
-    }
 
-    return(
+
+function Home() {
+
+  
+    return (
         <>
-            <button onClick={handleLogout}>Logar</button>
-           HOME
+            <HeaderPerfil />
+
+            <SectionStyle>
+                <Menu />
+                <Card />
+                {/* <Historicos /> */}
+
+            </SectionStyle>
+
         </>
     )
 }
 
-export default Home
 
+export default Home
